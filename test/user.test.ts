@@ -81,3 +81,35 @@ describe("POST /api/users/login", () => {
   });
 });
 
+describe("should be able to get user", () => {
+  let jwtToken: string;
+  beforeEach(async () => {
+    await UserTest.create();
+    jwtToken = await UserTest.login();
+  });
+  afterEach(async () => {
+    await UserTest.delete();
+  });
+
+  it("should return 200 if get user success", async () => {
+    const response = await supertest(web)
+      .get("/api/users/current")
+      .set("Cookie", [`token=${jwtToken}`]);
+
+    console.log(response);
+
+    expect(response.status).toBe(200);
+  });
+
+  it("should reject if token invalid", async () => {
+    const response = await supertest(web)
+      .get("/api/users/current")
+      .set("Cookie", [`token=${jwtToken + 1}`]);
+
+    console.log(response);
+
+    expect(response.status).toBe(401);
+  });
+});
+
+

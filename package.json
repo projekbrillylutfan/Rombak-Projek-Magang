@@ -16,7 +16,6 @@
   "repository": "https://github.com/projekbrillylutfan/Rombak-Projek-Magang.git",
   "author": "projekbrillylutfan <projekbrillylutfan@gmail.com>",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "@prisma/client": "^5.14.0",
     "bcrypt": "^5.1.1",

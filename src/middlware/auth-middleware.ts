@@ -10,13 +10,12 @@ export const authMiddleware = async (
   next: NextFunction
 ) => {
   const token = req.cookies?.token;
-
   if (!token) {
     return res
       .status(401)
       .json({
         status: 401,
-        errors: "Unauthorized",
+        errors: "token not found",
         data: null,
       })
       .end();
@@ -36,7 +35,7 @@ export const authMiddleware = async (
         .status(401)
         .json({
           status: 401,
-          errors: "Unauthorized",
+          errors: "token tidak valid",
           data: null,
         })
         .end();
