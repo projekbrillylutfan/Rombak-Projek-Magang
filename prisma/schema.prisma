@@ -22,7 +22,7 @@ model User {
   user_id Int @id @default(autoincrement())
   nama String @db.VarChar(100)
   jabatan String @db.VarChar(100)
-  username String @db.VarChar(100)
+  username String @unique @db.VarChar(100)
   password String @db.VarChar(200)
   role UserRole @default(user)
 }

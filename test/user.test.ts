@@ -38,3 +38,46 @@ describe("POST /api/users/register", () => {
     ]);
   });
 });
+
+describe("POST /api/users/login", () => {
+  beforeEach(async () => {
+    await UserTest.create();
+  });
+  afterEach(async () => {
+    await UserTest.delete();
+  });
+
+  it("should return 200 if login success", async () => {
+    const response = await supertest(web).post("/api/users/login").send({
+      username: "test",
+      password: "test",
+    });
+
+    console.log(response);
+    expect(response.status).toBe(200);
+    expect(response.body.data.akses_token).toBeDefined();
+  });
+
+  it("should reject if username invalid", async () => {
+    const response = await supertest(web).post("/api/users/login").send({
+      username: "salah",
+      password: "test",
+    });
+
+    console.log(response);
+    expect(response.status).toBe(401);
+    expect(response.body.message).toEqual("Username not found");
+  });
+
+  it("should reject if password invalid", async () => {
+    const response = await supertest(web).post("/api/users/login").send({
+      username: "test",
+      password: "salah",
+    });
+
+    console.log(response);
+    expect(response.status).toBe(401);
+    expect(response.body.message).toEqual("Wrong password");
+  });
+});
+
