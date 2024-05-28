@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { CreateUserRequest, LoginUserRequest } from "../model/dto/user-dto";
 import UserService from "../service/user-service";
+import { UserRequest } from "../type/user-request";
 
 class UserController {
     static async registerUser(req: Request, res: Response, next: NextFunction) {
@@ -9,7 +10,7 @@ class UserController {
             const response = await UserService.registerUser(request)
             res.status(200).json({
                 status: 200,
-                message: "success",
+                message: "success register user",
                 data: response
             })
         } catch (e) {
@@ -23,7 +24,20 @@ class UserController {
             const response = await UserService.loginUser(request)
             res.status(200).json({
                 status: 200,
-                message: "success",
+                message: "success login",
+                data: response
+            })
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static async getUserCurrent(req: UserRequest, res: Response, next: NextFunction) {
+        try {
+            const response = await UserService.getUserCurrent(req.user!)
+            res.status(200).json({
+                status: 200,
+                message: "succes get current user",
                 data: response
             })
         } catch (e) {

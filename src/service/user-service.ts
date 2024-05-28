@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import ResponseError from "../error/response-error";
 import {
   CreateUserRequest,
@@ -66,6 +67,10 @@ class UserService {
     }
 
     return authToken
+  }
+
+  static async getUserCurrent(user: User): Promise<UserResponse> {
+    return toUserResponse(user)
   }
 }
 
