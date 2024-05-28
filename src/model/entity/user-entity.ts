@@ -7,3 +7,7 @@ export function toUserResponse(user: User): UserResponse  {
         username: user.username
     }
 }
+
+export interface Auth {
+    akses_token: string
+}

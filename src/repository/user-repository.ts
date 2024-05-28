@@ -16,6 +16,14 @@ class UserRepository {
       },
     });
   }
+
+  static async checkUser(username: string): Promise<User | null> {
+    return await prismaClient.user.findUnique({
+        where: {
+            username: username
+        }
+      });
+  }
 }
 
 export default UserRepository;

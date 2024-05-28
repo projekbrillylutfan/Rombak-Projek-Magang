@@ -1,10 +1,15 @@
 import ResponseError from "../error/response-error";
-import { CreateUserRequest, UserResponse } from "../model/dto/user-dto";
-import { toUserResponse } from "../model/entity/user-entity";
+import {
+  CreateUserRequest,
+  LoginUserRequest,
+  UserResponse,
+} from "../model/dto/user-dto";
+import { Auth, toUserResponse } from "../model/entity/user-entity";
 import UserRepository from "../repository/user-repository";
 import UserValidation from "../validation/user-validation";
 import Validation from "../validation/validation";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 class UserService {
   static async registerUser(req: CreateUserRequest): Promise<UserResponse> {
@@ -23,6 +28,44 @@ class UserService {
     const user = await UserRepository.createUser(registerUser);
 
     return toUserResponse(user);
+  }
+
+  static async loginUser(req: LoginUserRequest): Promise<Auth> {
+    const loginUser = Validation.validate(UserValidation.LOGIN, req);
+
+    const checkingUser = await UserRepository.checkUser(loginUser.username);
+
+    if (!checkingUser) {
+      throw new ResponseError(401, "Username not found");
+    }
+
+    const isPassValid = await bcrypt.compare(
+      loginUser.password,
+      checkingUser.password
+    );
+
+    if (!isPassValid) {
+      throw new ResponseError(401, "Wrong password");
+    }
+
+    const jwtSecret = "RAHASIAMUEHEHEH";
+    const jwtExpireTime = "24h";
+
+    const token = jwt.sign(
+      {
+        username: checkingUser.username,
+      },
+      jwtSecret,
+      {
+        expiresIn: jwtExpireTime,
+      }
+    );
+
+    const authToken: Auth = {
+      akses_token: token,
+    }
+
+    return authToken
   }
 }
 

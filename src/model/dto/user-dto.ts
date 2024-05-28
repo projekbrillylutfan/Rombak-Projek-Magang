@@ -10,3 +10,8 @@ export interface UserResponse {
     nama: string
     token?: string
 }
+
+export type LoginUserRequest = {
+    username: string
+    password: string
+}
