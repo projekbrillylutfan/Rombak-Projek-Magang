@@ -25,4 +25,14 @@ model User {
   username String @unique @db.VarChar(100)
   password String @db.VarChar(200)
   role UserRole @default(user)
+
+  @@map("users")
+}
+
+model Bupati {
+  bupati_id Int @id @default(autoincrement())
+  nama String @db.VarChar(100)
+  periode String @db.VarChar(100)
+
+  @@map("bupati")
 }
