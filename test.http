@@ -1,0 +1,26 @@
+### Register user
+POST http://localhost:3000/api/users/register
+Content-Type: application/json
+Accept: application/json
+
+{
+    "nama": "test",
+    "jabatan": "test",
+    "username": "test",
+    "password": "test"
+}
+
+### Login User
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "test",
+  "password" : "test"
+}
+
+### Get User
+GET http://localhost:3000/api/users/current
+Accept: application/json
+set-cookie: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE3MTY5MDAyODEsImV4cCI6MTcxNjk4NjY4MX0.AHwTeVtizMdoB_K-etRvQy2VBUOUfBu9D01dgNtt2Qg
