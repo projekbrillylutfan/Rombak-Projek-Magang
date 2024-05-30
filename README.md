@@ -24,11 +24,13 @@
    - Nama Lokasi
    - Alamat
 
-4. Peserta
-   - ID Peserta (Primary Key)
+4. User
+   - ID User (Primary Key)
    - Nama
    - Jabatan
-   - Instansi
+   - username
+   - password
+   - role
 
 5. Jenis Acara
    - ID Jenis Acara (Primary Key)
@@ -41,16 +43,11 @@
    - Jam Mulai
    - Jam Selesai
 
-7. Agenda_Peserta
-   - ID Agenda (Foreign Key)
-   - ID Peserta (Foreign Key)
-
 RELASI:
 
 1. Bupati dapat memiliki banyak agenda.
 2. Setiap agenda berlangsung di satu lokasi, tetapi satu lokasi dapat digunakan untuk banyak agenda.
 3. Setiap agenda memiliki satu jenis acara, tetapi satu jenis acara dapat digunakan untuk banyak agenda.
-4. Agenda dapat melibatkan banyak peserta, dan peserta dapat menghadiri banyak agenda.
-5. Setiap agenda memiliki detail waktu yang spesifik.
+4. Setiap agenda memiliki detail waktu yang spesifik.
 
 
