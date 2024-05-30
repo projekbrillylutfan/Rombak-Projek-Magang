@@ -3,6 +3,7 @@ import ResponseError from "../error/response-error";
 import {
   CreateUserRequest,
   LoginUserRequest,
+  UpdateUserRequest,
   UserResponse,
 } from "../model/dto/user-dto";
 import { Auth, toUserResponse } from "../model/entity/user-entity";
@@ -64,13 +65,26 @@ class UserService {
 
     const authToken: Auth = {
       akses_token: token,
-    }
+    };
 
-    return authToken
+    return authToken;
   }
 
   static async getUserCurrent(user: User): Promise<UserResponse> {
-    return toUserResponse(user)
+    return toUserResponse(user);
+  }
+
+  static async updateUser(
+    user: User,
+    req: UpdateUserRequest
+  ): Promise<UserResponse> {
+    const udpateUserReq = Validation.validate(UserValidation.UPDATE, req);
+
+    udpateUserReq.password = await bcrypt.hash(udpateUserReq.password, 10);
+
+    const result = await UserRepository.updateUser(user, udpateUserReq);
+
+    return toUserResponse(result);
   }
 }
 

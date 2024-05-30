@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateUserRequest, LoginUserRequest } from "../model/dto/user-dto";
+import {
+  CreateUserRequest,
+  LoginUserRequest,
+  UpdateUserRequest,
+} from "../model/dto/user-dto";
 import UserService from "../service/user-service";
 import { UserRequest } from "../type/user-request";
 
@@ -49,6 +53,20 @@ class UserController {
       res.status(200).json({
         status: 200,
         message: "succes get current user",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async updateUser(req: UserRequest, res: Response, next: NextFunction) {
+    try {
+      const request: UpdateUserRequest = req.body as UpdateUserRequest;
+      const response = await UserService.updateUser(req.user!, request);
+      res.status(200).json({
+        status: 200,
+        message: "success update user",
         data: response,
       });
     } catch (e) {

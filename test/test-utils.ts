@@ -12,6 +12,14 @@ class UserTest {
     });
   }
 
+  static async deleteUpdate() {
+    await prismaClient.user.deleteMany({
+      where: {
+        username: "test update",
+      },
+    });
+  }
+
   static async create() {
     await prismaClient.user.create({
       data: {

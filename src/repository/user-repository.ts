@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { prismaClient } from "../application/database";
-import { CreateUserRequest } from "../model/dto/user-dto";
+import { CreateUserRequest, UpdateUserRequest } from "../model/dto/user-dto";
 
 class UserRepository {
   static async createUser(data: CreateUserRequest): Promise<User> {
@@ -22,6 +22,15 @@ class UserRepository {
         where: {
             username: username
         }
+      });
+  }
+
+  static async updateUser(user: User, req: UpdateUserRequest): Promise<User> {
+    return await prismaClient.user.update({
+        where: {
+          username: user.username,
+        },
+        data: req,
       });
   }
 }
