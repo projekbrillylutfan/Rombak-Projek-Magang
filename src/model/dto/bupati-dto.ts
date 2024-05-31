@@ -8,3 +8,9 @@ export interface BupatiResponse {
     nama: string
     periode: string
 }
+
+export interface UpdateBupatiRequest {
+    id: number;
+    nama: string;
+    periode: string;
+}

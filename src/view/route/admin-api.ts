@@ -10,3 +10,4 @@ adminRouter.use(authMiddleware);
 adminRouter.use(isAdmin)
 
 adminRouter.post("/api/admin/bupati/create", BupatiController.createBupati)
+adminRouter.put("/api/admin/bupati/update/:id", BupatiController.updateBupati)

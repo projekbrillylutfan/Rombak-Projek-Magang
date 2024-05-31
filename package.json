@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "dev": "node dist/main.js"
+    "dev": "ts-node-dev src/main.ts",
+    "seed": "ts-node-dev prisma/seed.ts"
   },
   "jest": {
     "transform": {

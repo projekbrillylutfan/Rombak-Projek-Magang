@@ -77,3 +77,30 @@ describe("POST /api/bupati/create", () => {
     })
 })
 
+describe("PUT /api/admin/bupati/update/:id", () => {
+    let jwtToken: string;
+    beforeEach(async () => {
+        await UserTest.createAdmin();
+        jwtToken = await UserTest.loginAdmin();
+        await BupatiTest.create();
+    })
+
+    afterEach(async () => {
+        await UserTest.deleteAdmin();
+        await BupatiTest.delete();
+    })
+    it("should return 200 if update bupati success", async () => {
+        const bupati = await BupatiTest.get();
+        const response = await supertest(web)
+            .put(`/api/admin/bupati/update/${bupati.bupati_id}`)
+            .set("Cookie", [`token=${jwtToken}`])
+            .send({
+                nama: "bupati test update",
+                periode: "2023-2024",
+            })
+        console.log("id bupati : ",bupati.bupati_id)
+        expect(response.status).toBe(200);
+        expect(response.body.data.periode).toBe("2023-2024");
+        expect(response.body.data.nama).toBe("bupati test update");
+    })
+})

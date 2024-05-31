@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateBupatiRequest } from "../model/dto/bupati-dto";
+import { CreateBupatiRequest, UpdateBupatiRequest } from "../model/dto/bupati-dto";
 import BupatiService from "../service/bupati-service";
 
 class BupatiController {
@@ -12,6 +12,21 @@ class BupatiController {
         message: "success create bupati",
         data: response,
       });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async updateBupati(req: Request, res: Response, next: NextFunction) {
+    try {
+        const updateRequest: UpdateBupatiRequest = req.body as UpdateBupatiRequest;
+        updateRequest.id = Number(req.params.id);
+        const response = await BupatiService.updateBupati(updateRequest)
+        res.status(200).json({
+            status: 200,
+            message: "success update bupati",
+            data: response
+        })
     } catch (e) {
       next(e);
     }

@@ -2,6 +2,7 @@ import { prismaClient } from "../src/application/database";
 import bcrypt from "bcrypt";
 import request from "supertest";
 import { web } from "../src/application/web";
+import { Bupati } from "@prisma/client";
 
 class UserTest {
   static async delete() {
@@ -122,6 +123,29 @@ export class BupatiTest {
       },
     });
   }
+
+  static async create() {
+    await prismaClient.bupati.create({
+      data: {
+        nama: "bupati test",
+        periode: "2022-2023",
+      },
+    });
+  }
+
+  static async get(): Promise<Bupati> {
+    const bupatiGet = await prismaClient.bupati.findFirst({
+        where: {
+            nama: "bupati test"
+        }
+    })
+
+    if (!bupatiGet!.bupati_id) {
+        throw new Error("User is not found");
+    }
+
+    return bupatiGet!;
+}
 }
 
 export default UserTest;
