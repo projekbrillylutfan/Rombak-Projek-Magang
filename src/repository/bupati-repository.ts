@@ -35,6 +35,14 @@ class BupatiRepository {
       data: req,
     });
   }
+
+  static async deleteBupati(bupati_id: number): Promise<Bupati> {
+      return await prismaClient.bupati.delete({
+          where: {
+              bupati_id: bupati_id
+          }
+      })
+  }
 }
 
 export default BupatiRepository;

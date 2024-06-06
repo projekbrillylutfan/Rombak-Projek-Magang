@@ -31,6 +31,20 @@ class BupatiController {
       next(e);
     }
   }
+
+  static async deleteBupati(req: Request, res: Response, next: NextFunction) {
+    try {
+      const bupati_id = Number(req.params.id);
+      const response = await BupatiService.deleteBupati(bupati_id);
+      res.status(200).json({
+        status: 200,
+        message: "success delete bupati",
+        data: response,
+      })
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default BupatiController;

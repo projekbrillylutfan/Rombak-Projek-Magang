@@ -11,3 +11,4 @@ adminRouter.use(isAdmin)
 
 adminRouter.post("/api/admin/bupati/create", BupatiController.createBupati)
 adminRouter.put("/api/admin/bupati/update/:id", BupatiController.updateBupati)
+adminRouter.delete("/api/admin/bupati/delete/:id", BupatiController.deleteBupati)

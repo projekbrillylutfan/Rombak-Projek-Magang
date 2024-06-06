@@ -24,6 +24,14 @@ class BupatiService {
 
         return toBupatiResponse(bupatiUpdate);
     }
+
+    static async deleteBupati(id: number): Promise<BupatiResponse> {
+        await BupatiRepository.checkBupati(id)
+
+        const bupatiDelete = await BupatiRepository.deleteBupati(id)
+
+        return toBupatiResponse(bupatiDelete)
+    }
 }
 
 export default BupatiService
