@@ -38,6 +38,12 @@ class BupatiService {
 
         return bupaties.map((bupati) => toBupatiResponse(bupati))
     }
+
+    static async getBupatiById(id: number): Promise<BupatiResponse> {
+        const bupati = await BupatiRepository.checkBupati(id)
+
+        return toBupatiResponse(bupati)
+    }
 }
 
 export default BupatiService

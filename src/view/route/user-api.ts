@@ -14,3 +14,4 @@ userRouter.put("/api/users/update", UserController.updateUser)
 
 //api Bupati
 userRouter.get("/api/bupati", BupatiController.getAllBupati)
+userRouter.get("/api/bupati/:id", BupatiController.getBupatiById)
