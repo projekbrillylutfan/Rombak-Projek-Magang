@@ -1,5 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateBupatiRequest, UpdateBupatiRequest } from "../model/dto/bupati-dto";
+import {
+  CreateBupatiRequest,
+  UpdateBupatiRequest,
+} from "../model/dto/bupati-dto";
 import BupatiService from "../service/bupati-service";
 
 class BupatiController {
@@ -19,14 +22,15 @@ class BupatiController {
 
   static async updateBupati(req: Request, res: Response, next: NextFunction) {
     try {
-        const updateRequest: UpdateBupatiRequest = req.body as UpdateBupatiRequest;
-        updateRequest.bupati_id = Number(req.params.id);
-        const response = await BupatiService.updateBupati(updateRequest)
-        res.status(200).json({
-            status: 200,
-            message: "success update bupati",
-            data: response
-        })
+      const updateRequest: UpdateBupatiRequest =
+        req.body as UpdateBupatiRequest;
+      updateRequest.bupati_id = Number(req.params.id);
+      const response = await BupatiService.updateBupati(updateRequest);
+      res.status(200).json({
+        status: 200,
+        message: "success update bupati",
+        data: response,
+      });
     } catch (e) {
       next(e);
     }
@@ -40,7 +44,34 @@ class BupatiController {
         status: 200,
         message: "success delete bupati",
         data: response,
-      })
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getAllBupati(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await BupatiService.getAllBupati();
+      res.status(200).json({
+        status: 200,
+        message: "success get all bupati",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getBupatiById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const bupati_id = Number(req.params.id);
+      const response = await BupatiService.getBupatiById(bupati_id);
+      res.status(200).json({
+        status: 200,
+        message: "success get bupati by id",
+        data: response,
+      });
     } catch (e) {
       next(e);
     }

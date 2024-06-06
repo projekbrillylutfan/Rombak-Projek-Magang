@@ -32,6 +32,18 @@ class BupatiService {
 
         return toBupatiResponse(bupatiDelete)
     }
+
+    static async getAllBupati(): Promise<Array<BupatiResponse>> {
+        const bupaties = await BupatiRepository.getAllBupati()
+
+        return bupaties.map((bupati) => toBupatiResponse(bupati))
+    }
+
+    static async getBupatiById(id: number): Promise<BupatiResponse> {
+        const bupati = await BupatiRepository.checkBupati(id)
+
+        return toBupatiResponse(bupati)
+    }
 }
 
 export default BupatiService
