@@ -43,6 +43,10 @@ class BupatiRepository {
           }
       })
   }
+
+  static async getAllBupati(): Promise<Bupati[]> {
+    return await prismaClient.bupati.findMany()
+  }
 }
 
 export default BupatiRepository;
