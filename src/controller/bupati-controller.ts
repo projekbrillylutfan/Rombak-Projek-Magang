@@ -20,7 +20,7 @@ class BupatiController {
   static async updateBupati(req: Request, res: Response, next: NextFunction) {
     try {
         const updateRequest: UpdateBupatiRequest = req.body as UpdateBupatiRequest;
-        updateRequest.id = Number(req.params.id);
+        updateRequest.bupati_id = Number(req.params.id);
         const response = await BupatiService.updateBupati(updateRequest)
         res.status(200).json({
             status: 200,

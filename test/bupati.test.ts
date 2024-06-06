@@ -93,12 +93,13 @@ describe("PUT /api/admin/bupati/update/:id", () => {
         const bupati = await BupatiTest.get();
         const response = await supertest(web)
             .put(`/api/admin/bupati/update/${bupati.bupati_id}`)
+            .set("Content-Type", "application/json")
             .set("Cookie", [`token=${jwtToken}`])
             .send({
                 nama: "bupati test update",
                 periode: "2023-2024",
             })
-        console.log("id bupati : ",bupati.bupati_id)
+        console.log(response.error);
         expect(response.status).toBe(200);
         expect(response.body.data.periode).toBe("2023-2024");
         expect(response.body.data.nama).toBe("bupati test update");

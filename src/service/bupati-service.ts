@@ -17,14 +17,10 @@ class BupatiService {
 
     static async updateBupati(req: UpdateBupatiRequest): Promise<BupatiResponse> {
         const updateRequest = Validation.validate(BupatiValidation.UPDATE, req)
+        console.log(updateRequest)
         await BupatiRepository.checkBupati(updateRequest.bupati_id)
 
-        const bupatiUpdate = await prismaClient.bupati.update({
-            where: {
-                bupati_id: updateRequest.id
-            }, 
-            data: updateRequest
-        })
+        const bupatiUpdate = await BupatiRepository.updateBupati(updateRequest)
 
         return toBupatiResponse(bupatiUpdate);
     }

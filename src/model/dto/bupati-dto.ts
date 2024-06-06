@@ -10,7 +10,7 @@ export interface BupatiResponse {
 }
 
 export interface UpdateBupatiRequest {
-    id: number;
+    bupati_id: number;
     nama: string;
     periode: string;
 }
