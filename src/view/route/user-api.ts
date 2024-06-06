@@ -10,3 +10,5 @@ userRouter.use(authMiddleware);
 //api user
 userRouter.get("/api/users/current", UserController.getUserCurrent)
 userRouter.put("/api/users/update", UserController.updateUser)
+
+//api Bupati
