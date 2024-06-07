@@ -18,3 +18,4 @@ adminRouter.delete("/api/admin/bupati/delete/:id", BupatiController.deleteBupati
 //lokasi route
 adminRouter.post("/api/admin/lokasi/create", LokasiController.createLokasi)
 adminRouter.put("/api/admin/lokasi/update/:id", LokasiController.updateLokasi)
+adminRouter.delete("/api/admin/lokasi/delete/:id", LokasiController.deleteLokasi)

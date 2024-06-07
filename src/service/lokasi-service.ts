@@ -21,6 +21,12 @@ class LokasiService {
 
         return toLokasiResponse(lokasiUpdate);
     }
+
+    static async deleteLokasi(id: number): Promise<LokasiResponse> {
+        await LokasiRepository.checkLokasi(id);
+        const lokasiDelete = await LokasiRepository.deleteLokasi(id);
+        return toLokasiResponse(lokasiDelete);
+    }
  }
 
 export default LokasiService
