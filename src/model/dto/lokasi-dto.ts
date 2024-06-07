@@ -8,3 +8,9 @@ export interface LokasiResponse {
   nama_lokasi: string;
   alamat: string;
 }
+
+export interface UpdateLokasiRequest {
+  id: number;
+  nama_lokasi: string;
+  alamat: string;
+}

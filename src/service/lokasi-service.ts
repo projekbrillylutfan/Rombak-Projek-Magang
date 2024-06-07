@@ -1,4 +1,4 @@
-import { CreateLokasiRequest, LokasiResponse } from "../model/dto/lokasi-dto";
+import { CreateLokasiRequest, LokasiResponse, UpdateLokasiRequest } from "../model/dto/lokasi-dto";
 import { toLokasiResponse } from "../model/entity/lokasi-entity";
 import LokasiRepository from "../repository/lokasi-repository";
 import LokasiValidation from "../validation/lokasi-validation";
@@ -12,6 +12,15 @@ class LokasiService {
 
         return toLokasiResponse(lokasi);
     }
-}
+
+    static async updateLokasi(req: UpdateLokasiRequest): Promise<LokasiResponse> {
+        const updateLokasi = Validation.validate(LokasiValidation.UPDATE, req);
+        await LokasiRepository.checkLokasi(updateLokasi.id);
+
+        const lokasiUpdate = await LokasiRepository.updateLokasi(updateLokasi);
+
+        return toLokasiResponse(lokasiUpdate);
+    }
+ }
 
 export default LokasiService
