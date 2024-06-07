@@ -17,7 +17,6 @@ class BupatiService {
 
     static async updateBupati(req: UpdateBupatiRequest): Promise<BupatiResponse> {
         const updateRequest = Validation.validate(BupatiValidation.UPDATE, req)
-        console.log(updateRequest)
         await BupatiRepository.checkBupati(updateRequest.bupati_id)
 
         const bupatiUpdate = await BupatiRepository.updateBupati(updateRequest)
