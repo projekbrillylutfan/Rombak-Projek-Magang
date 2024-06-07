@@ -32,6 +32,14 @@ class LokasiRepository {
             data: data
         })
     }
+
+    static async deleteLokasi(id: number): Promise<Lokasi> {
+        return await prismaClient.lokasi.delete({
+            where: {
+                id: id
+            }
+        })
+    }
 }
 
 export default LokasiRepository
