@@ -36,3 +36,11 @@ model Bupati {
 
   @@map("bupati")
 }
+
+model Lokasi {
+  id Int @id @default(autoincrement())
+  nama_lokasi String @db.VarChar(200)
+  alamat String @db.VarChar(255)
+
+  @@map("lokasi")
+}
