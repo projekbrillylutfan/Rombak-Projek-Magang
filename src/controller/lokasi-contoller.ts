@@ -61,6 +61,20 @@ class LokasiController {
       next(e);
     }
   }
+
+  static async getLokasiById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const response = await LokasiService.getLokasiById(id);
+      res.status(200).json({
+        status: 200,
+        message: "success get lokasi by id",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default LokasiController;

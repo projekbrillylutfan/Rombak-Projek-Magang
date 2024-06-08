@@ -19,3 +19,4 @@ userRouter.get("/api/bupati/:id", BupatiController.getBupatiById)
 
 //api lokasi
 userRouter.get("/api/lokasi", LokasiController.getAllLokasi)
+userRouter.get("/api/lokasi/:id", LokasiController.getLokasiById)

@@ -33,6 +33,12 @@ class LokasiService {
 
         return lokasies.map((lokasi) => toLokasiResponse(lokasi));
     }
+
+    static async getLokasiById(id: number): Promise<LokasiResponse> {
+        const lokasi = await LokasiRepository.checkLokasi(id);
+
+        return toLokasiResponse(lokasi);
+    }
  }
 
 export default LokasiService
