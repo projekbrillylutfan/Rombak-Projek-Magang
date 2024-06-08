@@ -27,6 +27,18 @@ class LokasiService {
         const lokasiDelete = await LokasiRepository.deleteLokasi(id);
         return toLokasiResponse(lokasiDelete);
     }
+
+    static async getAllLokasi(): Promise<LokasiResponse[]> {
+        const lokasies = await LokasiRepository.getAllLokasi();
+
+        return lokasies.map((lokasi) => toLokasiResponse(lokasi));
+    }
+
+    static async getLokasiById(id: number): Promise<LokasiResponse> {
+        const lokasi = await LokasiRepository.checkLokasi(id);
+
+        return toLokasiResponse(lokasi);
+    }
  }
 
 export default LokasiService

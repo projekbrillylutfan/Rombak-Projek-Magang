@@ -44,3 +44,11 @@ model Lokasi {
 
   @@map("lokasi")
 }
+
+model JenisAcara {
+  id Int @id @default(autoincrement())
+  jenis_acara String @db.VarChar(100)
+
+  @@map("jenis_acara")
+}
+

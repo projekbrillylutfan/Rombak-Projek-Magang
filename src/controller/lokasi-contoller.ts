@@ -48,6 +48,33 @@ class LokasiController {
       next(e);
     }
   }
+
+  static async getAllLokasi(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await LokasiService.getAllLokasi();
+      res.status(200).json({
+        status: 200,
+        message: "success get all lokasi",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getLokasiById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const response = await LokasiService.getLokasiById(id);
+      res.status(200).json({
+        status: 200,
+        message: "success get lokasi by id",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default LokasiController;
