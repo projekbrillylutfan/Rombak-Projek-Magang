@@ -40,6 +40,10 @@ class LokasiRepository {
             }
         })
     }
+
+    static async getAllLokasi(): Promise<Lokasi[]> {
+        return await prismaClient.lokasi.findMany()
+    }
 }
 
 export default LokasiRepository
