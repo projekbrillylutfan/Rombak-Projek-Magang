@@ -47,6 +47,12 @@ class JenisAcaraService {
 
     return jenisAcaras.map((jenisAcara) => toJenisAcaraResponse(jenisAcara));
   }
+
+  static async getJenisAcaraById(id: number): Promise<JenisAcaraResponse> {
+      const jenisAcara = await JenisAcaraRepository.checkJenisAcara(id);
+
+      return toJenisAcaraResponse(jenisAcara);
+  }
 }
 
 export default JenisAcaraService;

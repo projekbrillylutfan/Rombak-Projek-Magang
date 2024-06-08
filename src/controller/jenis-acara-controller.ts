@@ -79,6 +79,20 @@ class JenisAcaraController {
       next(e);
     }
   }
+
+  static async getJenisAcaraById(req: Request, res: Response, next: NextFunction) {
+    try {
+        const id = Number(req.params.id);
+        const response = await JenisAcaraService.getJenisAcaraById(id);
+        res.status(200).json({
+            status: 200,
+            message: "success get jenis acara by id",
+            data: response,
+        })
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default JenisAcaraController;

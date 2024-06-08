@@ -24,3 +24,4 @@ userRouter.get("/api/lokasi/:id", LokasiController.getLokasiById)
 
 //api jenis acara
 userRouter.get("/api/jenis-acara", JenisAcaraController.getAllJenisAcara)
+userRouter.get("/api/jenis-acara/:id", JenisAcaraController.getJenisAcaraById)
