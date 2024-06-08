@@ -21,6 +21,14 @@ class JenisAcaraService {
 
         return toJenisAcaraResponse(jenisAcaraUpdate);
     }
+
+    static async deleteJenisAcara(id: number): Promise<JenisAcaraResponse> {
+        await JenisAcaraRepository.checkJenisAcara(id)
+
+        const jenisAcaraDelete = await JenisAcaraRepository.deleteJenisAcara(id)
+
+        return toJenisAcaraResponse(jenisAcaraDelete)
+    }
 }
 
 export default JenisAcaraService

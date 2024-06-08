@@ -32,6 +32,14 @@ class JenisAcaraRepository {
             data: req
         })
     }
+
+    static async deleteJenisAcara(id: number): Promise<JenisAcara> {
+        return await prismaClient.jenisAcara.delete({
+            where: {
+                id: id
+            }
+        })
+    }
 }
 
 export default JenisAcaraRepository
