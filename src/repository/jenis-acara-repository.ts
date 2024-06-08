@@ -40,6 +40,10 @@ class JenisAcaraRepository {
             }
         })
     }
+
+    static async getAllJenisAcara(): Promise<JenisAcara[]> {
+        return await prismaClient.jenisAcara.findMany()
+    }
 }
 
 export default JenisAcaraRepository

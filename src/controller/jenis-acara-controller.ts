@@ -62,6 +62,23 @@ class JenisAcaraController {
       next(e);
     }
   }
+
+  static async getAllJenisAcara(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const response = await JenisAcaraService.getAllJenisAcara();
+      res.status(200).json({
+        status: 200,
+        message: "success get all jenis acara",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default JenisAcaraController;
