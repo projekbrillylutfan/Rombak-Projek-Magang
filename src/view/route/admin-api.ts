@@ -23,3 +23,4 @@ adminRouter.delete("/api/admin/lokasi/delete/:id", LokasiController.deleteLokasi
 
 //jenis acara route
 adminRouter.post("/api/admin/jenisacara/create", JenisAcaraController.createJenisAcara)
+adminRouter.put("/api/admin/jenisacara/update/:id", JenisAcaraController.updateJenisAcara)
