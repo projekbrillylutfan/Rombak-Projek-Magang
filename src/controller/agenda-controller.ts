@@ -19,6 +19,33 @@ class AgendaController {
       next(e);
     }
   }
+
+  static async getAllAgenda(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await AgendaService.getAllAgenda();
+      res.status(200).json({
+        status: 200,
+        message: "success get all agenda",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getAgendaById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const response = await AgendaService.getAgendaById(id);
+      res.status(200).json({
+        status: 200,
+        message: "success get agenda by id",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default AgendaController;

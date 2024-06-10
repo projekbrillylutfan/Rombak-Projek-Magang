@@ -18,6 +18,18 @@ class AgendaService {
 
     return toAgendaResponse(agenda);
   }
+
+  static async getAllAgenda(): Promise<Array<AgendaResponse>> {
+    const agendas = await AgendaRepository.getAllAgenda()
+
+    return agendas.map((agenda) => toAgendaResponse(agenda))
+  }
+
+  static async getAgendaById(id: number): Promise<AgendaResponse> {
+      const agenda = await AgendaRepository.getAgendaById(id)
+
+      return toAgendaResponse(agenda)
+  }
 }
 
 export default AgendaService;
