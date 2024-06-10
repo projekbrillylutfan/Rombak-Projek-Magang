@@ -5,6 +5,7 @@ import isAdmin from "../../middlware/auth-admin-middlware";
 import BupatiController from "../../controller/bupati-controller";
 import LokasiController from "../../controller/lokasi-contoller";
 import JenisAcaraController from "../../controller/jenis-acara-controller";
+import AgendaController from "../../controller/agenda-controller";
 
 export const adminRouter = express.Router();
 adminRouter.use(cookieParser());
@@ -25,3 +26,6 @@ adminRouter.delete("/api/admin/lokasi/delete/:id", LokasiController.deleteLokasi
 adminRouter.post("/api/admin/jenisacara/create", JenisAcaraController.createJenisAcara)
 adminRouter.put("/api/admin/jenisacara/update/:id", JenisAcaraController.updateJenisAcara)
 adminRouter.delete("/api/admin/jenisacara/delete/:id", JenisAcaraController.deleteJenisAcara)
+
+//agenda
+adminRouter.post("/api/admin/agenda/create/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.createAgenda)
