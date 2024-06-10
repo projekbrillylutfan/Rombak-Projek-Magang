@@ -1,4 +1,4 @@
-import { AgendaResponse, CreateAgendaRequest } from "../model/dto/agenda-dto";
+import { AgendaResponse, AgendaResponseJoin, CreateAgendaRequest } from "../model/dto/agenda-dto";
 import { toAgendaResponse } from "../model/entity/agenda-entity";
 import AgendaRepository from "../repository/agenda-repository";
 import BupatiRepository from "../repository/bupati-repository";
@@ -9,7 +9,12 @@ import Validation from "../validation/validation";
 
 class AgendaService {
   static async createAgenda(req: CreateAgendaRequest): Promise<AgendaResponse> {
-    const createReq = Validation.validate(AgendaValidation.CREATE, req);
+    const transformedData = {
+        ...req,
+        tanggalMulai: new Date(req.tanggalMulai),
+        tanggalSelesai: new Date(req.tanggalSelesai),
+      };
+    const createReq = Validation.validate(AgendaValidation.CREATE, transformedData);
     await BupatiRepository.checkBupati(createReq.bupatiId);
     await LokasiRepository.checkLokasi(createReq.lokasiId);
     await JenisAcaraRepository.checkJenisAcara(createReq.jenisAcaraId);
@@ -25,10 +30,10 @@ class AgendaService {
     return agendas.map((agenda) => toAgendaResponse(agenda))
   }
 
-  static async getAgendaById(id: number): Promise<AgendaResponse> {
+  static async getAgendaById(id: number): Promise<AgendaResponseJoin> {
       const agenda = await AgendaRepository.getAgendaById(id)
 
-      return toAgendaResponse(agenda)
+      return agenda
   }
 }
 
