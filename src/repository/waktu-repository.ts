@@ -33,6 +33,14 @@ class WaktuRespository {
       data: req,
     });
   }
+
+  static async deleteWaktu(id: number): Promise<Waktu> {
+    return await prismaClient.waktu.delete({
+        where: {
+            id: id
+        }
+    })
+  }
 }
 
 export default WaktuRespository;

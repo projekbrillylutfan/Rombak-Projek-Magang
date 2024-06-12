@@ -11,6 +11,11 @@ export interface GetWaktuRequest {
     agendaId: number
 }
 
+export interface DeleteWaktuRequest {
+    id: number
+    agendaId: number
+}
+
 export interface CreateWaktuRequest {
     agendaId: number
     tanggal: Date

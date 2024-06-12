@@ -1,4 +1,4 @@
-import { CreateWaktuRequest, UpdateWaktuRequest, WaktuResponse } from "../model/dto/waktu-dto";
+import { CreateWaktuRequest, DeleteWaktuRequest, UpdateWaktuRequest, WaktuResponse } from "../model/dto/waktu-dto";
 import { toWaktuResponse } from "../model/entity/waktu-entity";
 import AgendaRepository from "../repository/agenda-repository";
 import WaktuRespository from "../repository/waktu-repository";
@@ -39,6 +39,17 @@ class WaktuService {
         const waktuUpdate = await WaktuRespository.updateWaktu(updateReq)
 
         return toWaktuResponse(waktuUpdate)
+    }
+
+    static async deleteWaktu(req: DeleteWaktuRequest): Promise<WaktuResponse> {
+        const delteReq = Validation.validate(WaktuValidation.DELETE, req)
+
+        await AgendaRepository.checkIdAgenda(delteReq.agendaId)
+        await WaktuRespository.checkIdWaktu(delteReq.id)
+
+        const deleteWaktu = await WaktuRespository.deleteWaktu(delteReq)
+
+        return toWaktuResponse(deleteWaktu)
     }
 }
 
