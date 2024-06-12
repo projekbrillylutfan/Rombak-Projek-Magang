@@ -6,7 +6,20 @@ export interface WaktuResponse {
     jamSelesai: Date
 }
 
+export interface GetWaktuRequest {
+    id: number
+    agendaId: number
+}
+
 export interface CreateWaktuRequest {
+    agendaId: number
+    tanggal: Date
+    jamMulai: Date
+    jamSelesai: Date
+}
+
+export interface UpdateWaktuRequest {
+    id: number
     agendaId: number
     tanggal: Date
     jamMulai: Date
