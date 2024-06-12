@@ -41,6 +41,10 @@ class WaktuRespository {
         }
     })
   }
+  
+  static async getAllWaktu(): Promise<Waktu[]> {
+    return await prismaClient.waktu.findMany();
+  }
 }
 
 export default WaktuRespository;

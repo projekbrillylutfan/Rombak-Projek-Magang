@@ -56,6 +56,19 @@ class WaktuController {
       next(e);
     }
   }
+
+  static async getAllWaktu(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await WaktuService.getAllWaktu();
+      res.status(200).json({
+        status: 200,
+        message: "success get all Waktu",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default WaktuController;

@@ -51,6 +51,12 @@ class WaktuService {
 
         return toWaktuResponse(deleteWaktu)
     }
+
+    static async getAllWaktu(): Promise<Array<WaktuResponse>> {
+        const waktus = await WaktuRespository.getAllWaktu()
+
+        return waktus.map((waktu) => toWaktuResponse(waktu))
+    }
 }
 
 export default WaktuService
