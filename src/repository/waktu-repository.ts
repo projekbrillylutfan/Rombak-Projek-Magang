@@ -1,5 +1,9 @@
 import { Waktu } from "@prisma/client";
-import { CreateWaktuRequest, UpdateWaktuRequest } from "../model/dto/waktu-dto";
+import {
+  CreateWaktuRequest,
+  UpdateWaktuRequest,
+  WaktuResponseJoin,
+} from "../model/dto/waktu-dto";
 import { prismaClient } from "../application/database";
 import ResponseError from "../error/response-error";
 
@@ -32,6 +36,41 @@ class WaktuRespository {
       },
       data: req,
     });
+  }
+
+  static async deleteWaktu(id: number): Promise<Waktu> {
+    return await prismaClient.waktu.delete({
+      where: {
+        id: id,
+      },
+    });
+  }
+
+  static async getAllWaktu(): Promise<Waktu[]> {
+    return await prismaClient.waktu.findMany();
+  }
+
+  static async getWaktuById(id: number): Promise<WaktuResponseJoin> {
+    const waktu = await prismaClient.waktu.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        agenda: {
+          select: {
+            id: true,
+            namaAgenda: true,
+            deskripsi: true,
+          },
+        },
+      },
+    });
+
+    if (!waktu) {
+      throw new ResponseError(404, "Waktu not found");
+    }
+
+    return waktu;
   }
 }
 

@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateWaktuRequest, UpdateWaktuRequest } from "../model/dto/waktu-dto";
+import {
+  CreateWaktuRequest,
+  DeleteWaktuRequest,
+  UpdateWaktuRequest,
+} from "../model/dto/waktu-dto";
 import WaktuService from "../service/waktu-service";
 
 class WaktuController {
@@ -28,6 +32,51 @@ class WaktuController {
       res.status(200).json({
         status: 200,
         message: "success update Waktu",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async deleteWaktu(req: Request, res: Response, next: NextFunction) {
+    try {
+      const request: DeleteWaktuRequest = {
+        id: Number(req.params.id),
+        agendaId: Number(req.params.agendaId),
+      };
+
+      const response = await WaktuService.deleteWaktu(request);
+      res.status(200).json({
+        status: 200,
+        message: "success delete Waktu",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getAllWaktu(req: Request, res: Response, next: NextFunction) {
+    try {
+      const response = await WaktuService.getAllWaktu();
+      res.status(200).json({
+        status: 200,
+        message: "success get all Waktu",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async getWaktuById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const response = await WaktuService.getWaktuById(id);
+      res.status(200).json({
+        status: 200,
+        message: "success get Waktu by id",
         data: response,
       });
     } catch (e) {

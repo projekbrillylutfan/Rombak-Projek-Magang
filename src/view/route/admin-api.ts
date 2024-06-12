@@ -36,3 +36,4 @@ adminRouter.delete("/api/admin/agenda/delete/:id/:bupatiId/:lokasiId/:jenisAcara
 //waktu
 adminRouter.post("/api/admin/waktu/create/:agendaId", WaktuController.createWaktu)
 adminRouter.put("/api/admin/waktu/update/:id/:agendaId", WaktuController.updateWaktu)
+adminRouter.delete("/api/admin/waktu/delete/:id/:agendaId", WaktuController.deleteWaktu)
