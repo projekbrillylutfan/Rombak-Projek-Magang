@@ -1,4 +1,9 @@
-import { AgendaResponse, AgendaResponseJoin, CreateAgendaRequest, UpdateAgendaRequest } from "../model/dto/agenda-dto";
+import {
+  AgendaResponse,
+  AgendaResponseJoin,
+  CreateAgendaRequest,
+  UpdateAgendaRequest,
+} from "../model/dto/agenda-dto";
 import { toAgendaResponse } from "../model/entity/agenda-entity";
 import AgendaRepository from "../repository/agenda-repository";
 import BupatiRepository from "../repository/bupati-repository";
@@ -10,11 +15,14 @@ import Validation from "../validation/validation";
 class AgendaService {
   static async createAgenda(req: CreateAgendaRequest): Promise<AgendaResponse> {
     const transformedData = {
-        ...req,
-        tanggalMulai: new Date(req.tanggalMulai),
-        tanggalSelesai: new Date(req.tanggalSelesai),
-      };
-    const createReq = Validation.validate(AgendaValidation.CREATE, transformedData);
+      ...req,
+      tanggalMulai: new Date(req.tanggalMulai),
+      tanggalSelesai: new Date(req.tanggalSelesai),
+    };
+    const createReq = Validation.validate(
+      AgendaValidation.CREATE,
+      transformedData
+    );
     await BupatiRepository.checkBupati(createReq.bupatiId);
     await LokasiRepository.checkLokasi(createReq.lokasiId);
     await JenisAcaraRepository.checkJenisAcara(createReq.jenisAcaraId);
@@ -25,28 +33,32 @@ class AgendaService {
   }
 
   static async getAllAgenda(): Promise<Array<AgendaResponse>> {
-    const agendas = await AgendaRepository.getAllAgenda()
+    const agendas = await AgendaRepository.getAllAgenda();
 
-    return agendas.map((agenda) => toAgendaResponse(agenda))
+    return agendas.map((agenda) => toAgendaResponse(agenda));
   }
 
   static async getAgendaById(id: number): Promise<AgendaResponseJoin> {
-      const agenda = await AgendaRepository.getAgendaById(id)
+    const request = Validation.validate(AgendaValidation.GETID, {id});
+    const agenda = await AgendaRepository.getAgendaById(request.id);
 
-      return agenda
+    return agenda;
   }
 
-  static async updateAgenda(id: number, req: UpdateAgendaRequest): Promise<AgendaResponse> {
+  static async updateAgenda(
+    id: number,
+    req: UpdateAgendaRequest
+  ): Promise<AgendaResponse> {
     const request = Validation.validate(AgendaValidation.UPDATE, req);
 
-    await BupatiRepository.checkBupati(request.bupatiId)
-    await LokasiRepository.checkLokasi(request.lokasiId)
-    await JenisAcaraRepository.checkJenisAcara(request.jenisAcaraId)
-    await AgendaRepository.checkIdAgenda(id)
+    await BupatiRepository.checkBupati(request.bupatiId);
+    await LokasiRepository.checkLokasi(request.lokasiId);
+    await JenisAcaraRepository.checkJenisAcara(request.jenisAcaraId);
+    await AgendaRepository.checkIdAgenda(id);
 
-    const agendaUpdate = await AgendaRepository.updateAgenda(id, request)
+    const agendaUpdate = await AgendaRepository.updateAgenda(id, request);
 
-    return toAgendaResponse(agendaUpdate)
+    return toAgendaResponse(agendaUpdate);
   }
 }
 
