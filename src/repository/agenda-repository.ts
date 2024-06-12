@@ -68,10 +68,10 @@ class AgendaRepository {
     return agenda
   }
 
-  static async updateAgenda(id: number, req: UpdateAgendaRequest): Promise<Agenda> {
+  static async updateAgenda(req: UpdateAgendaRequest): Promise<Agenda> {
     return await prismaClient.agenda.update({
       where: {
-        id: id,
+        id: req.id,
         bupatiId: req.bupatiId,
         lokasiId: req.lokasiId,
         jenisAcaraId: req.jenisAcaraId,

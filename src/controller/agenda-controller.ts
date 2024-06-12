@@ -53,13 +53,13 @@ class AgendaController {
 
   static async updateAgenda(req: Request, res: Response, next: NextFunction) {
     try {
-      const id = Number(req.params.id);
       const request: UpdateAgendaRequest = req.body as UpdateAgendaRequest;
+      request.id = Number(req.params.id);
       request.bupatiId = Number(req.params.bupatiId);
       request.lokasiId = Number(req.params.lokasiId);
       request.jenisAcaraId = Number(req.params.jenisAcaraId);
 
-      const response = await AgendaService.updateAgenda(id, request);
+      const response = await AgendaService.updateAgenda(request);
 
       res.status(200).json({
         status: 200,

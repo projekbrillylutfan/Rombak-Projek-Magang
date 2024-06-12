@@ -47,17 +47,22 @@ class AgendaService {
   }
 
   static async updateAgenda(
-    id: number,
     req: UpdateAgendaRequest
   ): Promise<AgendaResponse> {
-    const request = Validation.validate(AgendaValidation.UPDATE, req);
+
+    const transformedData = {
+      ...req,
+      tanggalMulai: new Date(req.tanggalMulai),
+      tanggalSelesai: new Date(req.tanggalSelesai),
+    };
+    const request = Validation.validate(AgendaValidation.UPDATE, transformedData);
 
     await BupatiRepository.checkBupati(request.bupatiId);
     await LokasiRepository.checkLokasi(request.lokasiId);
     await JenisAcaraRepository.checkJenisAcara(request.jenisAcaraId);
-    await AgendaRepository.checkIdAgenda(id);
+    await AgendaRepository.checkIdAgenda(request.id);
 
-    const agendaUpdate = await AgendaRepository.updateAgenda(id, request);
+    const agendaUpdate = await AgendaRepository.updateAgenda(request);
 
     return toAgendaResponse(agendaUpdate);
   }
