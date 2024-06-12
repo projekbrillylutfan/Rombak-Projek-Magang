@@ -69,6 +69,20 @@ class WaktuController {
       next(e);
     }
   }
+
+  static async getWaktuById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const response = await WaktuService.getWaktuById(id);
+      res.status(200).json({
+        status: 200,
+        message: "success get Waktu by id",
+        data: response,
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
 }
 
 export default WaktuController;

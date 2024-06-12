@@ -30,3 +30,15 @@ export interface UpdateWaktuRequest {
     jamMulai: Date
     jamSelesai: Date
 }
+
+export interface WaktuResponseJoin {
+    id: number
+    tanggal: Date
+    jamMulai: Date
+    jamSelesai: Date
+    agenda: {
+        id: number
+        namaAgenda: string
+        deskripsi: string
+    }
+}
