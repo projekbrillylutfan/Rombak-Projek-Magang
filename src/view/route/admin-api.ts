@@ -29,3 +29,4 @@ adminRouter.delete("/api/admin/jenisacara/delete/:id", JenisAcaraController.dele
 
 //agenda
 adminRouter.post("/api/admin/agenda/create/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.createAgenda)
+adminRouter.put("/api/admin/agenda/update/:id/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.updateAgenda)

@@ -1,5 +1,5 @@
-import { Agenda } from "@prisma/client";
-import { AgendaResponse } from "../dto/agenda-dto";
+import { Agenda, Bupati, JenisAcara, Lokasi } from "@prisma/client";
+import { AgendaResponse, AgendaResponseJoin } from "../dto/agenda-dto";
 
 export function toAgendaResponse(agenda: Agenda): AgendaResponse {
   return {
@@ -14,6 +14,10 @@ export function toAgendaResponse(agenda: Agenda): AgendaResponse {
   };
 }
 
+// let bupati: Bupati
+// let lokasi: Lokasi
+// let jenisAcara: JenisAcara
+
 // export function toAgendaResponseJoin(agenda: Agenda): AgendaResponseJoin {
 //   return {
 //     id: agenda.id,
@@ -22,18 +26,18 @@ export function toAgendaResponse(agenda: Agenda): AgendaResponse {
 //     tanggalMulai: agenda.tanggalMulai,
 //     tanggalSelesai: agenda.tanggalSelesai,
 //     bupati: {
-//       id: agenda.bupatiId,
-//       nama: agenda.bupati.nama,
-//       periode: agenda.bupati.periode,
+//       bupatiId: agenda.bupatiId,
+//       nama:bupati.nama  ,
+//       periode: bupati.periode,
 //     },
 //     lokasi: {
-//       id: agenda.lokasi.id,
-//       namaLokasi: agenda.lokasi.namaLokasi,
-//       alamat: agenda.lokasi.alamat,
+//       lokasiId: agenda.lokasiId,
+//       nama_lokasi: lokasi.nama_lokasi,
+//       alamat: lokasi.alamat,
 //     },
 //     jenisAcara: {
-//       id: agenda.jenisAcara.id,
-//       namaJenisAcara: agenda.jenisAcara.namaJenisAcara,
+//       jenisAcaraId: agenda.jenisAcaraId,
+//       jenis_acara: jenisAcara.jenis_acara,
 //     },
 //   };
 // }

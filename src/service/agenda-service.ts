@@ -1,4 +1,4 @@
-import { AgendaResponse, AgendaResponseJoin, CreateAgendaRequest } from "../model/dto/agenda-dto";
+import { AgendaResponse, AgendaResponseJoin, CreateAgendaRequest, UpdateAgendaRequest } from "../model/dto/agenda-dto";
 import { toAgendaResponse } from "../model/entity/agenda-entity";
 import AgendaRepository from "../repository/agenda-repository";
 import BupatiRepository from "../repository/bupati-repository";
@@ -34,6 +34,19 @@ class AgendaService {
       const agenda = await AgendaRepository.getAgendaById(id)
 
       return agenda
+  }
+
+  static async updateAgenda(id: number, req: UpdateAgendaRequest): Promise<AgendaResponse> {
+    const request = Validation.validate(AgendaValidation.UPDATE, req);
+
+    await BupatiRepository.checkBupati(request.bupatiId)
+    await LokasiRepository.checkLokasi(request.lokasiId)
+    await JenisAcaraRepository.checkJenisAcara(request.jenisAcaraId)
+    await AgendaRepository.checkIdAgenda(id)
+
+    const agendaUpdate = await AgendaRepository.updateAgenda(id, request)
+
+    return toAgendaResponse(agendaUpdate)
   }
 }
 

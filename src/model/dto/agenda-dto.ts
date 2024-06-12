@@ -1,16 +1,16 @@
 export interface AgendaResponse {
-    id: number
-    bupatiId: number
-    namaAgenda: string
-    deskripsi: string
-    lokasiId: number
-    jenisAcaraId: number
-    tanggalMulai: Date
-    tanggalSelesai: Date
+  id: number;
+  bupatiId: number;
+  namaAgenda: string;
+  deskripsi: string;
+  lokasiId: number;
+  jenisAcaraId: number;
+  tanggalMulai: Date;
+  tanggalSelesai: Date;
 }
 
 export interface AgendaResponseJoin {
-    id: number;
+  id: number;
   namaAgenda: string;
   deskripsi: string;
   tanggalMulai: Date;
@@ -32,11 +32,22 @@ export interface AgendaResponseJoin {
 }
 
 export interface CreateAgendaRequest {
-    bupatiId: number
-    namaAgenda: string
-    deskripsi: string
-    lokasiId: number
-    jenisAcaraId: number
-    tanggalMulai: Date
-    tanggalSelesai: Date
+  bupatiId: number;
+  namaAgenda: string;
+  deskripsi: string;
+  lokasiId: number;
+  jenisAcaraId: number;
+  tanggalMulai: Date;
+  tanggalSelesai: Date;
+}
+
+export interface UpdateAgendaRequest {
+  id: number;
+  bupatiId: number;
+  namaAgenda: string;
+  deskripsi: string;
+  lokasiId: number;
+  jenisAcaraId: number;
+  tanggalMulai: Date;
+  tanggalSelesai: Date;
 }
