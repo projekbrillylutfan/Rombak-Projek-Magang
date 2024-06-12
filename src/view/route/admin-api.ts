@@ -6,6 +6,7 @@ import BupatiController from "../../controller/bupati-controller";
 import LokasiController from "../../controller/lokasi-contoller";
 import JenisAcaraController from "../../controller/jenis-acara-controller";
 import AgendaController from "../../controller/agenda-controller";
+import WaktuController from "../../controller/waktu-controller";
 
 export const adminRouter = express.Router();
 adminRouter.use(cookieParser());
@@ -31,3 +32,6 @@ adminRouter.delete("/api/admin/jenisacara/delete/:id", JenisAcaraController.dele
 adminRouter.post("/api/admin/agenda/create/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.createAgenda)
 adminRouter.put("/api/admin/agenda/update/:id/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.updateAgenda)
 adminRouter.delete("/api/admin/agenda/delete/:id/:bupatiId/:lokasiId/:jenisAcaraId", AgendaController.deleteAgenda)
+
+//waktu
+adminRouter.post("/api/admin/waktu/create/:agendaId", WaktuController.createWaktu)
