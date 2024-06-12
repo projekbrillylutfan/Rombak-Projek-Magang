@@ -2,6 +2,7 @@ import {
   AgendaResponse,
   AgendaResponseJoin,
   CreateAgendaRequest,
+  DeleteAgendaRequest,
   UpdateAgendaRequest,
 } from "../model/dto/agenda-dto";
 import { toAgendaResponse } from "../model/entity/agenda-entity";
@@ -59,6 +60,19 @@ class AgendaService {
     const agendaUpdate = await AgendaRepository.updateAgenda(id, request);
 
     return toAgendaResponse(agendaUpdate);
+  }
+
+  static async deleteAgenda(req: DeleteAgendaRequest): Promise<AgendaResponse> {
+    const deleteReq = Validation.validate(AgendaValidation.DELETE, req);
+
+    await BupatiRepository.checkBupati(deleteReq.bupatiId);
+    await LokasiRepository.checkLokasi(deleteReq.lokasiId);
+    await JenisAcaraRepository.checkJenisAcara(deleteReq.jenisAcaraId);
+    await AgendaRepository.checkIdAgenda(deleteReq.id);
+
+    const deleteAgenda = await AgendaRepository.deleteAgenda(deleteReq.id);
+
+    return toAgendaResponse(deleteAgenda);
   }
 }
 

@@ -1,5 +1,9 @@
 import { NextFunction, Request, Response } from "express";
-import { CreateAgendaRequest, UpdateAgendaRequest } from "../model/dto/agenda-dto";
+import {
+  CreateAgendaRequest,
+  DeleteAgendaRequest,
+  UpdateAgendaRequest,
+} from "../model/dto/agenda-dto";
 import AgendaService from "../service/agenda-service";
 
 class AgendaController {
@@ -61,7 +65,26 @@ class AgendaController {
         status: 200,
         message: "success update agenda",
         data: response,
-      })
+      });
+    } catch (e) {
+      next(e);
+    }
+  }
+
+  static async deleteAgenda(req: Request, res: Response, next: NextFunction) {
+    try {
+      const request: DeleteAgendaRequest = {
+        id: Number(req.params.id),
+        bupatiId: Number(req.params.bupatiId),
+        lokasiId: Number(req.params.lokasiId),
+        jenisAcaraId: Number(req.params.jenisAcaraId),
+      };
+      const response = await AgendaService.deleteAgenda(request);
+      res.status(200).json({
+        status: 200,
+        message: "success delete agenda",
+        data: response,
+      });
     } catch (e) {
       next(e);
     }

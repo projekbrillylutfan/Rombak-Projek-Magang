@@ -5,6 +5,7 @@ import {
   UpdateAgendaRequest,
 } from "../model/dto/agenda-dto";
 import { prismaClient } from "../application/database";
+import ResponseError from "../error/response-error";
 
 class AgendaRepository {
   static async createAgenda(data: CreateAgendaRequest): Promise<Agenda> {
@@ -47,7 +48,7 @@ class AgendaRepository {
     });
 
     if (!agenda) {
-      throw new Error("Agenda not found");
+      throw new ResponseError(400, "Agenda not found");
     }
 
     return agenda;
@@ -61,7 +62,7 @@ class AgendaRepository {
     });
 
     if (!agenda) {
-      throw new Error("Agenda not found");
+      throw new ResponseError(400, "Agenda not found");
     }
 
     return agenda
@@ -76,6 +77,14 @@ class AgendaRepository {
         jenisAcaraId: req.jenisAcaraId,
       },
       data: req,
+    })
+  }
+
+  static async deleteAgenda(id: number): Promise<Agenda> {
+    return await prismaClient.agenda.delete({
+      where: {
+        id: id
+      }
     })
   }
 }

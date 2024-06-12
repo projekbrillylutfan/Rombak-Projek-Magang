@@ -51,3 +51,10 @@ export interface UpdateAgendaRequest {
   tanggalMulai: Date;
   tanggalSelesai: Date;
 }
+
+export interface DeleteAgendaRequest {
+  id: number;
+  bupatiId: number;
+  lokasiId: number;
+  jenisAcaraId: number;
+}
