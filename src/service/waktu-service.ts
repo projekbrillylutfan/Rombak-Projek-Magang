@@ -59,7 +59,7 @@ class WaktuService {
     await AgendaRepository.checkIdAgenda(delteReq.agendaId);
     await WaktuRespository.checkIdWaktu(delteReq.id);
 
-    const deleteWaktu = await WaktuRespository.deleteWaktu(delteReq);
+    const deleteWaktu = await WaktuRespository.deleteWaktu(delteReq.id);
 
     return toWaktuResponse(deleteWaktu);
   }
