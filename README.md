@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Rombak-Projek-Magang
 
 # ERD Version (1.0.0) :
@@ -50,8 +49,3 @@ RELASI:
 2. Setiap agenda berlangsung di satu lokasi, tetapi satu lokasi dapat digunakan untuk banyak agenda.
 3. Setiap agenda memiliki satu jenis acara, tetapi satu jenis acara dapat digunakan untuk banyak agenda.
 4. Setiap agenda memiliki detail waktu yang spesifik.
-
-
-=======
-# belajar_nest_js
->>>>>>> 06c7e41 (first commit)
